@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>吴一麟专用计算器</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+        }
+
+        .span-2 {
+            grid-column: span 2;
+        }    
+
+        .zero {
+             grid-column: span 2;
+        }
+
+
+
+        .calculator {
+            width: 320px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            width: 100%;
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            padding: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 10px;
+            background: #f2f2f2;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 55px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+        .operator {
+            background: #667eea;
+            color: white;
+        }
+
+        .operator:hover {
+            background: #5a6fd8;
+        }
+
+        .equal {
+            background: #ff7675;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .equal:hover {
+            background: #e66767;
+        }
+
+        .clear {
+            background: #fab1a0;
+            color: white;
+        }
+
+        .clear:hover {
+            background: #f0937f;
+        }
+        /* 电脑端默认布局 */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* 让手机端的按钮更宽一些 */
+            @media (max-width: 768px) {
+        .buttons {
+            grid-template-columns: repeat(4, 1fr); /* 4个格子 */
+        }
+
+        button {
+            font-size: 18px;  /* 增大字体 */
+             padding: 15px;    /* 增加按钮的内边距 */
+         }
+        }
+        button {
+        height: 60px;
+        font-size: 20px;
+        border-radius: 12px;
+        }
+
+         /* 手机端优化 */
+        @media (max-width: 768px) {
+        button {
+        font-size: 22px;
+        padding: 12px;
+        height: 70px;
+         }
+        }
+    </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+
+    
+</head>
+
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" class="display" readonly>
+
+    <div class="buttons">
+
+    <!-- 第一排 -->
+    <button class="clear" onclick="deleteOne()">⌫</button>
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button onclick="append('.')">.</button>
+    <button class="operator" onclick="append('/')">÷</button>
+
+    <!-- 第二排 -->
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button class="operator" onclick="append('+')">+</button>
+
+    <!-- 第三排 -->
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button class="operator" onclick="append('-')">−</button>
+
+    <!-- 第四排 -->
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="operator" onclick="append('*')">×</button>
+
+    <!-- 第五排 -->
+    <button class="zero" onclick="append('0')">0</button>
+    <button class="equal" onclick="calculate()">=</button>
+
+     </div>
+
+</div>
+
+<script src="/jsq.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js');
+}
+</script>
+
+</body>
+</html>
